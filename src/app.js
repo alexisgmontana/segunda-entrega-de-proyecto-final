@@ -8,13 +8,16 @@ import { connectMongo, __dirname } from "./utils/utils.js";
 const app = express();
 const port = 8080;
 
+//MIDDLEWARE
 app.use(express.json());
 
+//MOTOR HANDLEBARS
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 app.use(express.static(__dirname + "/public"));
 
+//CONECT MONGO
 connectMongo();
 
 //RUTA PRODUCTOS

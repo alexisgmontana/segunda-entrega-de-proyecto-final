@@ -10,7 +10,7 @@ const routerProducts = express.Router();
 routerProducts.get("/", async (req, res) => {
   try {
     const totalProducts = await productService.getAllProducts();
-    return res.status(200).send({ status: "succes", data: totalProducts });
+    return res.status(200).send({ status: "success", data: totalProducts });
   } catch (error) {
     res.status(401).send(error);
   }

@@ -6,6 +6,7 @@ const __dirname = dirname(__filename);
 
 export { __dirname };
 
+//MULTER
 import multer from "multer";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,6 +19,7 @@ const storage = multer.diskStorage({
 
 export const uploader = multer({ storage });
 
+//MONGOOSE
 import { connect } from "mongoose";
 export async function connectMongo() {
   try {
