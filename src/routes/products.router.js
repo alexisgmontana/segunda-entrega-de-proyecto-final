@@ -1,4 +1,3 @@
-//@ts-check
 import express from "express";
 import { productService } from "../services/products.service.js";
 
@@ -9,8 +8,18 @@ const routerProducts = express.Router();
 
 routerProducts.get("/", async (req, res) => {
   try {
-    const totalProducts = await productService.getAllProducts();
-    return res.status(200).send({ status: "success", data: totalProducts });
+    // const limit = req.query.limit || 10;
+    // const totalProducts = await productService.getAllProducts();
+    // const partialProducts = totalProducts.slice(0, limit);
+    // if (limit) {
+    //   return res.status(200).send({ status: "success", data: partialProducts });
+    // } else {
+    //   return res.status(200).send({ status: "success", data: totalProducts });
+    // }
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+    const products = await productService.getAllProducts(limit, page);
+    return res.json({ products: products });
   } catch (error) {
     res.status(401).send(error);
   }
