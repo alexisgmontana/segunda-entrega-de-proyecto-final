@@ -4,6 +4,7 @@ import routerHtmlProducts from "./routes/products.html.router.js";
 import routerProducts from "./routes/products.router.js";
 import { connectMongo, __dirname } from "./utils.js";
 import path from "path";
+import ProductModel from "./DAO/models/porducts.model.js";
 
 const app = express();
 const port = 8080;

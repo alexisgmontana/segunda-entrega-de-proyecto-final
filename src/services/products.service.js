@@ -12,6 +12,11 @@ class ProductService {
     return products;
   }
 
+  async getProductById(pid) {
+    const productId = await ProductModel.findById(pid);
+    return productId;
+  }
+
   async createProduct(product) {
     const productCreated = await ProductModel.create(product);
     return productCreated;
