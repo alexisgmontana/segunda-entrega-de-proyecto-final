@@ -14,10 +14,17 @@ routerHtmlProducts.get("/", async (req, res) => {
       query,
       sort
     );
-    let prod = products.map((p) => {
-      return {};
+    let prod = products.docs.map((p) => {
+      return {
+        id: p._id,
+        title: p.title,
+        description: p.description,
+        price: p.price,
+        code: p.code,
+        stock: p.stock,
+      };
     });
-    return res.render("products", { products });
+    return res.render("products", { products, prod });
   } catch (error) {
     res.status(401).send(error);
   }

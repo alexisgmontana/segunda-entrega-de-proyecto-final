@@ -1,25 +1,18 @@
 import express from "express";
 import { productService } from "../services/products.service.js";
 
-// import ProductManager from "../DAO/productManager";
-
 const routerProducts = express.Router();
-// const productManager = new ProductManager("./products.json");
 
 routerProducts.get("/", async (req, res) => {
   try {
-    // const limit = req.query.limit || 10;
-    // const totalProducts = await productService.getAllProducts();
-    // const partialProducts = totalProducts.slice(0, limit);
-    // if (limit) {
-    //   return res.status(200).send({ status: "success", data: partialProducts });
-    // } else {
-    //   return res.status(200).send({ status: "success", data: totalProducts });
-    // }
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 10;
-    const products = await productService.getAllProducts(limit, page);
-    return res.json({ products: products });
+    const { limit = 10, page = 1, query, sort } = req.query;
+    const products = await productService.getAllProducts(
+      limit,
+      page,
+      query,
+      sort
+    );
+    return res.json({ products });
   } catch (error) {
     res.status(401).send(error);
   }

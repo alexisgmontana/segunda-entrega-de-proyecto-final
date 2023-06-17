@@ -1,0 +1,36 @@
+<!-- products.html.handlebars -->
+
+{{! Iterar sobre cada producto }}
+{{#each prod}}
+  <div>
+    <h2>{{this.title}}</h2>
+    <p>{{this.description}}</p>
+    <p>Precio: ${{this.price}}</p>
+    <p>Código: {{this.code}}</p>
+    <p>Stock: {{this.stock}}</p>
+
+    {{! Botón para agregar al carrito directamente }}
+    <form action="/cart" method="POST">
+      <input type="hidden" name="productId" value="{{this.id}}" />
+      <button type="submit">Agregar al carrito</button>
+    </form>
+
+    {{! Enlace para ver detalles del producto }}
+    <a href="/products/{{this.id}}">Ver detalles</a>
+  </div>
+{{/each}}
+
+{{! Paginación }}
+{{#if products.totalPages}}
+  <div style="display:flex">
+    {{#if products.hasPrevPage}}
+      <a href="/products?page={{products.prevPage}}">Anterior</a>
+    {{/if}}
+
+    <p>{{products.page}}</p>
+
+    {{#if products.hasNextPage}}
+      <a href="/products?page={{products.nextPage}}">Siguiente</a>
+    {{/if}}
+  </div>
+{{/if}}
